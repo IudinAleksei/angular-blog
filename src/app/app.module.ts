@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { PostPageComponent } from './post-page/post-page.component';
+import { PostComponent } from './shared/components/post/post.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [AppComponent, MainLayoutComponent, HomePageComponent, PostPageComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [AppComponent, MainLayoutComponent, HomePageComponent, PostPageComponent, PostComponent],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
