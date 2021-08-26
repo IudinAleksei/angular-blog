@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminLayoutComponent {
-  constructor(private authSvc: AuthService, private router: Router) {}
+  constructor(public authSvc: AuthService, private router: Router) {}
 
   logout(event: Event): void {
     event.preventDefault();

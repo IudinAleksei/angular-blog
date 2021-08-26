@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, Observable, Subject, tap } from 'rxjs';
 import { IFirebaseAuthResponse, IUser } from '../../../shared/interafaces';
 import { environment } from '../../../../environments/environment';
 
@@ -10,6 +10,8 @@ const LS_EXPIRES_KEY = 'fb-token-exp';
 
 @Injectable()
 export class AuthService {
+  public error$: Subject<string> = new Subject<string>();
+
   constructor(private http: HttpClient) {}
 
   login(user: IUser): Observable<any> {
@@ -18,7 +20,7 @@ export class AuthService {
       this.http
         .post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
         // @ts-ignore
-        .pipe(tap(this.setToken))
+        .pipe(tap(this.setToken), catchError(this.handleError.bind(this)))
     );
   }
 
@@ -36,6 +38,22 @@ export class AuthService {
       return null;
     }
     return localStorage.getItem(LS_TOKEN_KEY) as string;
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    const { message } = error.error.error;
+
+    switch (message) {
+      case 'EMAIL_NOT_FOUND':
+        this.error$.next('Такого email нет');
+        break;
+      case 'INVALID_MAIL':
+        this.error$.next('Неверный email');
+        break;
+      case 'INVALID_PASSWORD':
+        this.error$.next('Неверный пароль');
+        break;
+    }
   }
 
   private setToken(response: IFirebaseAuthResponse | null) {
