@@ -1,15 +1,38 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { IPost } from '../../shared/interafaces';
 
 @Component({
   selector: 'app-create-page',
   templateUrl: './create-page.component.html',
-  styleUrls: ['./create-page.component.scss']
+  styleUrls: ['./create-page.component.scss'],
 })
 export class CreatePageComponent implements OnInit {
+  form!: FormGroup;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
+    this.form = new FormGroup({
+      title: new FormControl(null, Validators.required),
+      text: new FormControl(null, Validators.required),
+      author: new FormControl(null, Validators.required),
+    });
   }
 
+  submit(): void {
+    if (this.form.invalid) {
+      return;
+    }
+
+    const post: IPost = {
+      ...this.form.value,
+      date: new Date(),
+    };
+  }
+
+  showError(inputName: string): boolean {
+    const inputControl = this.form.get(inputName);
+    return !!(inputControl?.touched && inputControl?.invalid);
+  }
 }
