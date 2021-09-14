@@ -33,6 +33,6 @@ const routes: Routes = [
     EditPageComponent,
   ],
   imports: [RouterModule.forChild(routes), FormsModule, ReactiveFormsModule, SharedModule],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthGuard],
 })
 export class AdminModule {}

@@ -8,7 +8,7 @@ const MS_IN_SEC = 1000;
 const LS_TOKEN_KEY = 'fb-token';
 const LS_EXPIRES_KEY = 'fb-token-exp';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   public error$: Subject<string> = new Subject<string>();
 
@@ -31,7 +31,7 @@ export class AuthService {
     return !!this.token;
   }
 
-  private get token(): string | null {
+  get token(): string | null {
     const expDate = new Date(localStorage.getItem(LS_EXPIRES_KEY) as string);
     if (new Date() > expDate) {
       this.logout();
