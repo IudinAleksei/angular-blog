@@ -1,4 +1,7 @@
+import { Observable } from 'rxjs';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { PostsService } from '../shared/posts.service';
+import { IPost } from '../shared/interafaces';
 
 @Component({
   selector: 'app-home-page',
@@ -7,7 +10,10 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePageComponent implements OnInit {
-  constructor() {}
+  posts$!: Observable<IPost[]>;
+  constructor(private postsService: PostsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.posts$ = this.postsService.getAll();
+  }
 }
