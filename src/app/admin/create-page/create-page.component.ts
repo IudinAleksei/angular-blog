@@ -1,6 +1,7 @@
-import { PostsService } from './../../shared/posts.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from '../shared/services/alert.service';
+import { PostsService } from '../../shared/posts.service';
 import { IPost } from '../../shared/interafaces';
 
 @Component({
@@ -11,7 +12,7 @@ import { IPost } from '../../shared/interafaces';
 export class CreatePageComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private postsService: PostsService) {}
+  constructor(private postsService: PostsService, private alertService: AlertService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -33,6 +34,7 @@ export class CreatePageComponent implements OnInit {
 
     this.postsService.create(post).subscribe(() => {
       this.form.reset();
+      this.alertService.success('Пост успешно создан');
     });
   }
 

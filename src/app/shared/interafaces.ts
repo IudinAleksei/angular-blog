@@ -20,3 +20,8 @@ export interface IPost {
 export interface IFirebaseCreateResponse {
   name: string;
 }
+
+export interface IAlert {
+  type: 'success' | 'warning' | 'danger';
+  text: string;
+}

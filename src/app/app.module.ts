@@ -2,6 +2,8 @@ import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import ruLocale from '@angular/common/locales/ru';
 import { AuthInterceptor } from './shared/auth.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +13,8 @@ import { PostPageComponent } from './post-page/post-page.component';
 import { SharedModule } from './shared/shared.module';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { PostComponent } from './shared/components/post/post.component';
+
+registerLocaleData(ruLocale, 'ru');
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,

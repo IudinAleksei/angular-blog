@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { Subscription } from 'rxjs';
 import { IPost } from '../../shared/interafaces';
 import { PostsService } from '../../shared/posts.service';
+import { AlertService } from '../shared/services/alert.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -14,7 +15,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   subs: Subscription[] = [];
   searchStr = '';
 
-  constructor(private postsService: PostsService, private cd: ChangeDetectorRef) {}
+  constructor(private postsService: PostsService, private cd: ChangeDetectorRef, private alertService: AlertService) {}
 
   ngOnInit(): void {
     this.subs.push(
@@ -33,6 +34,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     this.subs.push(
       this.postsService.remove(id).subscribe(() => {
         this.posts = this.posts.filter((post) => post.id !== id);
+        this.alertService.danger('Пост удален');
         this.cd.markForCheck();
       }),
     );
