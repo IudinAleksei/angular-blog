@@ -9,32 +9,23 @@
     {{ message }}
   </div>
 
-  <div class="form-control"
-       [class]="{invalid: showError('email')}">
+  <div class="form-control" [class]="{ invalid: showError('email') }">
     <label for="email">Email:</label>
-    <input id="email" type="email" formControlName="email">
-    <div *ngIf="showError('email')"
-         class="validation">
-      <small *ngIf="form.get('email')?.errors?.required">
-        Введите email
-      </small>
-      <small *ngIf="form.get('email')?.errors?.email">
-        Введите корректный email
-      </small>
+    <input id="email" type="email" formControlName="email" />
+    <div *ngIf="showError('email')" class="validation">
+      <small *ngIf="form.get('email')?.errors?.required"> Введите email </small>
+      <small *ngIf="form.get('email')?.errors?.email"> Введите корректный email </small>
     </div>
   </div>
 
   <div class="form-control">
     <label for="password">Пароль:</label>
-    <input id="password" type="password" formControlName="password">
-    <div *ngIf="showError('password')"
-         class="validation">
-      <small *ngIf="form.get('password')?.errors?.required">
-        Введите пароль
-      </small>
+    <input id="password" type="password" formControlName="password" />
+    <div *ngIf="showError('password')" class="validation">
+      <small *ngIf="form.get('password')?.errors?.required"> Введите пароль </small>
       <small *ngIf="form.get('password')?.errors?.minlength">
-        Длина пароля должна быть не менее {{ form.get('password')?.errors?.minlength!.requiredLength }} символов.
-        Сейчас его длина {{ form.get('password')?.errors?.minlength!.actualLength }}
+        Длина пароля должна быть не менее {{ (form.get('password')?.errors?.minlength)!.requiredLength }} символов.
+        Сейчас его длина {{ (form.get('password')?.errors?.minlength)!.actualLength }}
       </small>
     </div>
   </div>

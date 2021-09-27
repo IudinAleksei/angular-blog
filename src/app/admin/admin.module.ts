@@ -9,6 +9,7 @@ import { CreatePageComponent } from './create-page/create-page.component';
 import { AuthService } from './shared/services/auth.service';
 import { SharedModule } from '../shared/shared.module';
 import { AuthGuard } from './shared/services/auth.guard';
+import { SearchPipe } from './shared/search.pipe';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
     DashboardPageComponent,
     CreatePageComponent,
     EditPageComponent,
+    SearchPipe,
   ],
   imports: [RouterModule.forChild(routes), FormsModule, ReactiveFormsModule, SharedModule],
   providers: [AuthGuard],
