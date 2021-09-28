@@ -1,8 +1,9 @@
 import { ActivatedRoute, Params } from '@angular/router';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { PostsService } from '../shared/posts.service';
 import { IPost } from '../shared/interafaces';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-post-page',

@@ -1,10 +1,11 @@
 import { ActivatedRoute, Params } from '@angular/router';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, switchMap, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { IPost } from 'src/app/shared/interafaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PostsService } from '../../shared/posts.service';
 import { AlertService } from '../shared/services/alert.service';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-page',

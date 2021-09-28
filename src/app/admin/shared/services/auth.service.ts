@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, Observable, Subject, tap } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { IFirebaseAuthResponse, IUser } from '../../../shared/interafaces';
 import { environment } from '../../../../environments/environment';
+import { catchError, tap } from 'rxjs/operators';
 
 const MS_IN_SEC = 1000;
 const LS_TOKEN_KEY = 'fb-token';
